@@ -25,10 +25,11 @@ export const StatusPanel = ({
 
     useEffect(() => {
         if(isStart) {
-            setProtocolFund( 120 )
-            setMarketBuy( 80 )
-            setLuckyStaker( 20 )
-            setLiquidity( 20 )
+            const fund = 120
+            setProtocolFund( fund )
+            setMarketBuy( fund * 0.8 )
+            setLuckyStaker( fund * 0.1 )
+            setLiquidity( fund * 0.1 )
 
             setTimeout(() => {
                 setProtocolProgress(50)

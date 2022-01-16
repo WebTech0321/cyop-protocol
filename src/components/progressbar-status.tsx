@@ -22,7 +22,7 @@ export const ProgressBarStatus = ({value, total, unit, animateInterval = 10, vis
 
     useEffect(() => {
         let prog = []
-        const progress = Math.round(TOTAL_BAR_COUNT * currentValue / 100);
+        const progress = Math.round(TOTAL_BAR_COUNT * currentValue / (total || 1));
         for(let i = 0; i < TOTAL_BAR_COUNT; i++) {
             prog.push( i < progress )
         }

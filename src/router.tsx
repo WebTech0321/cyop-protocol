@@ -9,6 +9,7 @@ function MainRouter() {
     <Router>
       <Routes>
           <Route path="*" element={<AppLayout />} />
+          <Route path="/" element={<Navigate to="/active-event" />} />
       </Routes>
     </Router>
   );

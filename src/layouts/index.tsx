@@ -1,6 +1,6 @@
 import React, { useState, useEffect }  from "react"
 import useTyped from "hooks/typed";
-import { Routes, Route, useLocation } from "react-router-dom"
+import { Routes, Route, useLocation, Navigate } from "react-router-dom"
 import StatusPanel from "./status-panel";
 import CommandPanel from "components/command-panel";
 import NavPanel from "./nav-panel";
@@ -20,7 +20,7 @@ export const AppLayout = () => {
 		<div className="co-main d-flex flex-column">
 			<ScreenError />
 
-			<div className="d-flex h-100">
+			<div className="d-flex h-100 overflow-hidden">
 				<div className="co-left-panel d-flex flex-column">
 					<div className="d-flex flex-column flex-1 pe-2 overflow-hidden">
 						{isCmdVisible &&
