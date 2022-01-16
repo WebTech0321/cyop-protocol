@@ -38,5 +38,5 @@ export default function useTyped({text, startDelay = 0, speed = 50, onComplete} 
     };
   }, []); // Empty array ensures that effect is only run on mount and unmount
 
-  return currentString;
+  return [ currentString, currentString.length > 0 && currentString.length !== text.length ];
 }

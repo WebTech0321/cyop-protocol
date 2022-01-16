@@ -6,28 +6,24 @@ const SCREEN_MIN_H = 768 // 1024
 
 export const ScreenError = () => {
 	
-    const [showTitleCaret, setShowTitleCaret] = useState(true)
-    const [showCaret, setShowCaret] = useState(false)
     const [isDesktop, setDesktop] = useState(true)
     
     const onCompleteTitleAnimation = () => {
-        setShowTitleCaret(false)
-        setShowCaret(true)
     }
 
     const onCompleteAnimation = () => {
-        setShowCaret(false)
+        // setShowCaret(false)
     }
 
-    const errorTitle = useTyped({
+    const [errorTitle, titleCaret] = useTyped({
         text: "Incompatible device detected.",
-        speed: 10,
+        speed: 20,
         onComplete: onCompleteTitleAnimation
     })
-    const errorText = useTyped({
+    const [errorText, textCaret] = useTyped({
         text: "Please use a desktop computer to access the terminal.",
-        startDelay: 500,
-        speed: 10,
+        startDelay: 800,
+        speed: 20,
         onComplete: onCompleteAnimation
     })
     
@@ -56,16 +52,16 @@ export const ScreenError = () => {
         <>
         {!isDesktop &&
             <div className="full-screen text-center p-3 d-flex flex-column align-items-center justify-content-center">
-                <div className="text-with-caret text-danger mb-2">
+                <div className="text-danger mb-2">
                     <span>{errorTitle}</span>
-                    {showTitleCaret && 
-                    <span className="text-caret danger"></span>
+                    {titleCaret && 
+                    <span className="typed-cursor danger">|</span>
                     }
                 </div>
-                <div className="text-with-caret">
+                <div>
                     <span>{errorText}</span>
-                    {showCaret && 
-                    <span className="text-caret"></span>
+                    {textCaret && 
+                    <span className="typed-cursor">|</span>
                     }
                 </div>
             </div>

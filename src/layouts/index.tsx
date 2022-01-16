@@ -1,5 +1,4 @@
 import React, { useState, useEffect }  from "react"
-import useTyped from "hooks/typed";
 import { Routes, Route, useLocation, Navigate } from "react-router-dom"
 import StatusPanel from "./status-panel";
 import CommandPanel from "components/command-panel";
