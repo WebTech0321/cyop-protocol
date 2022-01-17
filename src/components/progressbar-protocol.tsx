@@ -6,7 +6,7 @@ interface IProgressBarProtocol {
     animateInterval?: number,
 }
 
-const UNIT_PROG_WIDTH = 32;
+const UNIT_PROG_WIDTH = 16;
 
 export const ProgressBarProtocol = ({progress, animateInterval = 5} : IProgressBarProtocol) => {
 	

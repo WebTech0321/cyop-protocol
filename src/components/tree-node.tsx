@@ -3,11 +3,12 @@ import useIncrease from "hooks/increase";
 
 interface ITreeNode {
     title: string | ReactNode,
+    defaultExpanded?: boolean,
 }
 
-export const TreeNode : FC<ITreeNode> = ({title, children}) => {
+export const TreeNode : FC<ITreeNode> = ({title, defaultExpanded, children}) => {
 	
-    const [expanded, setExpanded] = useState(true)
+    const [expanded, setExpanded] = useState<boolean>(defaultExpanded || false)
 
 	return (
 		<div className="co-treenode">

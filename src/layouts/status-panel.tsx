@@ -46,7 +46,7 @@ export const StatusPanel = ({
                         <ProgressBarStatus total={protocolFund} value={protocolFund} unit="eth" visible={false}/>
                     </div>
                     
-                    <div className="ms-3 flex-0">
+                    <div className="ms-3 flex-0" style={{lineHeight: '20px'}}>
                         <div>Initiated</div>
                         <div className="text-desc">
                             {date2str(initatedDate)} <br/>{time2str(initatedDate)}

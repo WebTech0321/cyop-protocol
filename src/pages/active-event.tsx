@@ -1,83 +1,101 @@
-import React, {useState, useCallback} from "react"
-import ProgressBar from "components/progressbar";
+import React, {useState, useEffect, ReactNode} from "react"
 import TreeNode from "components/tree-node";
 import { commaValue } from "helpers/utils";
 
+interface IEventNode {
+    title: string,
+    value: number,
+    children?: ReactNode[]
+}
+
+const activeEvents : IEventNode[] = [
+    {
+        title: "CyOp",
+        value: 1273,
+        children: [
+            <div className="co-button">vote</div>,
+            (<>
+                <span className="text-danger">description:\</span><span>CyOp is a disruptive, community governed event triggerted by the Protocaol and altering the tokenomics of a coin. </span>
+            </>),
+            (<>
+                <span className="text-danger">input:\</span><span>etherscam / dextools / uniswap / slippage 12%</span>
+            </>)
+        ]
+    },
+    {
+        title: "qnt",
+        value: 1273,
+        children: [
+            <div className="co-button">vote</div>,
+            (<>
+                <span className="text-danger">description:\</span><span>CyOp is a disruptive, community governed event triggerted by the Protocaol and altering the tokenomics of a coin. </span>
+            </>),
+            (<>
+                <span className="text-danger">input:\</span><span>etherscam / dextools / uniswap / slippage 12%</span>
+            </>)
+        ]
+    },
+    {
+        title: "zinu",
+        value: 1273
+    },
+    {
+        title: "ewt",
+        value: 1273
+    },
+    {
+        title: "dxo",
+        value: 1273
+    }
+]
+
 export const ActiveEvent = () => {
 
-    const rootNode01 = (
+    const [events, setEvents] = useState<IEventNode[]>([])
+
+    const renderRootNode = (node: IEventNode) : ReactNode => (
         <div>
-            <span>CyOp</span><span className="ms-1 text-desc">[{commaValue(1273)}]</span>
+            <span>{node.title}</span><span className="ms-1 text-desc">[{commaValue(node.value)}]</span>
         </div>
     )
 
-    const rootNode02 = (
-        <div>
-            <span>qnt</span><span className="ms-1 text-desc">[{commaValue(1133)}]</span>
-        </div>
-    )
+    const addEvent = (idx : number) => {
+        if(idx >= activeEvents.length)
+            return;
+        let humanize = Math.round(Math.random() * 500 + 300);
+        console.log(humanize)
+        setTimeout(() => {
+            if(idx < activeEvents.length) {
+                const newEvents = activeEvents.slice(0, idx + 1)
+                setEvents(newEvents)
+            }
+            
+            addEvent(idx + 1)
+        }, humanize)
+    }
 
-    const rootNode03 = (
-        <div>
-            <span>zinu</span><span className="ms-1 text-desc">[{commaValue(1043)}]</span>
-        </div>
-    )
-
-    const rootNode04 = (
-        <div>
-            <span>ewt</span><span className="ms-1 text-desc">[{commaValue(913)}]</span>
-        </div>
-    )
-
-    const rootNode05 = (
-        <div>
-            <span>dxo</span><span className="ms-1 text-desc">[{commaValue(872)}]</span>
-        </div>
-    )
-
-    const childNode01 = (
-        <div className="co-button">vote</div>
-    )
-
-    const childNode02 = (
-        <>
-            <span className="text-danger">description:\</span><span>CyOp is a disruptive, community governed event triggerted by the Protocaol and altering the tokenomics of a coin. </span>
-        </>
-    )
-
-    const childNode03 = (
-        <>
-            <span className="text-danger">input:\</span><span>etherscam / dextools / uniswap / slippage 12%</span>
-        </>
-    )
+    useEffect(() => {
+        addEvent(0)
+    }, [])
 
 	return (
 		<>
             <div className="co-searchbar px-2 d-flex align-items-center">
                 <div className="me-1">search</div>
-                <div style={{width: '320px'}}>
-                    <ProgressBar progress={20} />
+                <div className="co-search-field-wrapper">
+                    <input className="co-search-field" />
                 </div>
                 <div className="ms-auto pointer">add token</div>
             </div>
             <div className="co-main-content py-3 flex-1">
                 <div className="co-treeview">
-                    <TreeNode title={rootNode01}>
-                        <TreeNode title={childNode01} />
-                        <TreeNode title={childNode02} />
-                        <TreeNode title={childNode03} />
+                    {events.map((event, idx) => (
+                    <TreeNode key={`rootnode-${event.title}-${idx}`} title={renderRootNode(event)} defaultExpanded={idx === 0}>
+                        {event.children?.map((node) => (
+                            <TreeNode key={`child-${event.title}-${idx}`} title={node} />
+                        ))}
                     </TreeNode>
-                    <TreeNode title={rootNode02}>
-                        <TreeNode title={childNode01} />
-                        <TreeNode title={childNode02} />
-                        <TreeNode title={childNode03} />
-                    </TreeNode>
-                    <TreeNode title={rootNode03}>
-                    </TreeNode>
-                    <TreeNode title={rootNode04}>
-                    </TreeNode>
-                    <TreeNode title={rootNode05}>
-                    </TreeNode>
+                    ))}
                 </div>
             </div>
 		</>

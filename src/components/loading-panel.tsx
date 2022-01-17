@@ -23,21 +23,22 @@ export const LoadingPanel = () => {
         navigate("/active-event")
     }
 
-    const [textConnected, connectCaret] = useTyped({
+    const [textConnected, connectCompleted] = useTyped({
         text: "wallet successfully connected...",
-        speed: 20,
+        start: true,
+        speed: 30,
         onComplete: onCompleteTitleAnimation
     })
-    const [textInitiate, initiateCaret] = useTyped({
+    const [textInitiate, initiateCompleted] = useTyped({
         text: "initiate terminal.",
-        startDelay: 600,
-        speed: 20,
+        start: connectCompleted,
+        speed: 30,
         onComplete: onCompleteInitiateAnimation
     })
-    const [textSearch, searchCaret] = useTyped({
+    const [textLoading] = useTyped({
         text: "loading",
-        startDelay: 1000,
-        speed: 20,
+        start: initiateCompleted,
+        speed: 30,
         onComplete: onCompleteSearchAnimation
     })
     
@@ -46,27 +47,24 @@ export const LoadingPanel = () => {
             <div className="loading-panel-notification text-start">
                 <div className="mb-2">
                     <span>{textConnected}</span>
-                    {connectCaret && 
+                    {!connectCompleted && 
                     <span className="typed-cursor danger">|</span>
                     }
                 </div>
                 <div className="">
                     <span>{textInitiate}</span>
-                    {initiateCaret && 
+                    {connectCompleted && !initiateCompleted && 
                     <span className="typed-cursor">|</span>
                     }
                 </div>
             </div>
             <div className="d-flex align-items-center">
                 <div className="me-1">
-                    {textSearch}
-                    {searchCaret && 
-                    <span className="typed-cursor">|</span>
-                    }
+                    {textLoading}
                 </div>
                 <div style={{width: '320px'}}>
                     {showProgress &&
-                        <ProgressBar progress={100} onComplete={onCompleteLoading}/>
+                        <ProgressBar progress={100} animateInterval={20} onComplete={onCompleteLoading}/>
                     }
                 </div>
             </div>

@@ -15,14 +15,16 @@ export const ScreenError = () => {
         // setShowCaret(false)
     }
 
-    const [errorTitle, titleCaret] = useTyped({
+    const [errorTitle, titleCompleted] = useTyped({
         text: "Incompatible device detected.",
+        start: true,
+        startDelay: 500,
         speed: 20,
         onComplete: onCompleteTitleAnimation
     })
-    const [errorText, textCaret] = useTyped({
+    const [errorText, textCompleted] = useTyped({
         text: "Please use a desktop computer to access the terminal.",
-        startDelay: 800,
+        start: titleCompleted,
         speed: 20,
         onComplete: onCompleteAnimation
     })
@@ -54,13 +56,13 @@ export const ScreenError = () => {
             <div className="full-screen text-center p-3 d-flex flex-column align-items-center justify-content-center">
                 <div className="text-danger mb-2">
                     <span>{errorTitle}</span>
-                    {titleCaret && 
+                    {!titleCompleted && 
                     <span className="typed-cursor danger">|</span>
                     }
                 </div>
                 <div>
                     <span>{errorText}</span>
-                    {textCaret && 
+                    {textCompleted && 
                     <span className="typed-cursor">|</span>
                     }
                 </div>

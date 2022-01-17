@@ -153,19 +153,19 @@ img {
 .co-progress-protocol {
     position: relative;
     width: calc(100% - 12px);
-    height: 176px;
+    height: 88px;
 
     & .progress-item {
         &.progress-overall {        
             background-image: url(../images/prog-protocol-01.png);
-            background-position: top 0px left 8px;
+            background-position: top 0px left 4px;
         }
         &.progress-half {
             background-image: url(../images/prog-protocol-01.png);
-            background-position: top 16px left 0px;
+            background-position: top 8px left 0px;
         }
         &.progress-current {
-            left: 16px;
+            left: 8px;
             background-image: url(../images/prog-protocol-02.png);
         }
     }
@@ -267,6 +267,10 @@ $treenode-padding: 38px;
         width: 30px;
         height: 1px;
         background-color: $primary-color;
+        
+        -webkit-animation: growLineH 0.5s ease-out;
+        -moz-animation: growLineH 0.5s ease-out;
+        animation: growLineH 0.5s ease-out;
     }
 
     &::after {
@@ -277,14 +281,103 @@ $treenode-padding: 38px;
         width: 2px;
         height: calc(100% + 24px);
         background-color: $primary-color;
+
+        -webkit-animation: growLine 0.25s ease-out;
+        -moz-animation: growLine 0.25s ease-out;
+        animation: growLine 0.25s ease-out;
     }
 
     &:last-child {
+        -webkit-animation: fadeInFromNone 0.5s ease-out;
+        -moz-animation: fadeInFromNone 0.5s ease-out;
+        animation: fadeInFromNone 0.5s ease-out;
+
         margin-bottom: 0px;
         &::after {
             height: 0px;
+            animation: none;
         }
     }
+}
+
+@-webkit-keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+@keyframes growLine{
+    0% { height: 0; }
+    100% { height: calc(100% + 24px); }
+}
+@-webkit-keyframes growLine{
+    0% { height: 0; }
+    100% { height: calc(100% + 24px); }
+}
+@-moz-keyframes growLine{
+    0% { height: 0; }
+    100% { height: calc(100% + 24px); }
+}
+
+@keyframes growLineH{
+    0% { width: 0; }
+    50% { width: 0; }
+    100% { width: 30px; }
+}
+@-webkit-keyframes growLineH{
+    0% { width: 0; }
+    50% { width: 0; }
+    100% { width: 30px; }
+}
+@-moz-keyframes growLineH{
+    0% { width: 0; }
+    50% { width: 0; }
+    100% { width: 30px; }
 }
 
 .loading-panel-notification {
@@ -300,6 +393,42 @@ $treenode-padding: 38px;
     padding: 0 10px;
     border-radius: 1px;
     cursor: pointer;
+}
+
+.btn-connect {
+    font-size: 24px;
+    line-height: 30px;
+    padding: 5px 16px;
+    border-radius: 2px;
+}
+
+.co-search-field-wrapper {
+    width: 320px;
+    position: relative;
+
+    &::before {    
+        content: "";
+        background-image: url(../images/prog-normal.png);
+        background-repeat: repeat;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        opacity: 0.5;
+        z-index: -1;
+    }
+}
+.co-search-field {
+    padding: 0 15px;
+    background: transparent;
+    background-image: none;
+    color: $primary-color;
+    border: none;
+
+    &:focus-visible {
+        outline: none;
+    }
 }
 
 .typed-cursor{
