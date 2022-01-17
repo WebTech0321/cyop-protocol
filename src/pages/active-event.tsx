@@ -62,7 +62,7 @@ export const ActiveEvent = () => {
     const addEvent = (idx : number) => {
         if(idx >= activeEvents.length)
             return;
-        let humanize = Math.round(Math.random() * 500 + 300);
+        let humanize = Math.round(Math.random() * 800 + 500);
         console.log(humanize)
         setTimeout(() => {
             if(idx < activeEvents.length) {
